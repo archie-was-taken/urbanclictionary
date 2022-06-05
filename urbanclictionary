@@ -59,5 +59,4 @@ definition = resp['list'][result]['definition'].replace(RCHAR, '. ').replace(NEW
 ups = resp['list'][result]['thumbs_up']
 downs = resp['list'][result]['thumbs_down']
 
-
 print(f'{NEWLINE} -> Definition of "{word}", with ↑ {ups} and ↓ {downs}:\n |\\-> {definition}\n | \\-> Example: {example}\n |\n -> By {author} at {written_at}')
