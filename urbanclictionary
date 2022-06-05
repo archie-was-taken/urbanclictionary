@@ -61,7 +61,3 @@ downs = resp['list'][result]['thumbs_down']
 
 
 print(f'{NEWLINE} -> Definition of "{word}", with ↑ {ups} and ↓ {downs}:\n |\\-> {definition}\n | \\-> Example: {example}\n |\n -> By {author} at {written_at}')
-
-# print(f' -> Definition of "{word}" which has ↑ {ups} and ↓ {downs}\n  \\-> By {author} at {written_at}')
-# print(f'  |{NEWLINE}  \\-> {definition}')
-# print(f'  |{NEWLINE}  \\-> Example:\n   \\-> {example}')
