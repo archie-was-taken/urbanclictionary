@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+
+from sys import argv, exit
+
+del argv[0]
+
+try:
+	argv[0]
+
+except IndexError:
+	exit(' -> [?] urbanclictionary, a urban dictionary cli program\n | \\-----> Usage: ./urbanclictionary WORD RESULT_NUMBER %PAGE_NUMBER\n |  \\-> Examples: ./urbanclictionary void linux\n |                ./urbanclictionary linux 3 (3rd result)\n |                ./urbanclictionary linux 3 %3 (3rd result, 3rd page)\n \\-> [!] if RESULT and PAGE are not defined, 1 will be the default')
+
+try:
+	from requests import get
+
+except ImportError:
+	exit(' -> [!] module `requests` is not installed, please run `pip3 install requests`')
+
+from datetime import datetime
+from pprint import pprint
+from os import system
+
+search_word = ''
+result = 0
+page = 1
+
+for argument in argv:
+	try:
+		result = int(argument) - 1
+
+	except ValueError:
+		if argument.startswith('%'):
+			page = argument[1:]
+
+		if type(argument).__name__ == 'str' and not argument.startswith('%'):
+			search_word += f' {argument}'
+
+	
+search_word = search_word.strip(' ')
+resp = get(f'https://api.urbandictionary.com/v0/define?term={search_word.replace(" ", "+")}&page={page}').json()
+NEWLINE = '\n'
+RCHAR = '\r'
+
+print(f' -> [!?] Searching for "{search_word}" (result {result + 1}, page {page})...')
+
+pages_len = len(resp['list'])
+
+if pages_len == 0:
+	exit(f' -> [!!] No definition found for "{search_word}" at page {page} with result {result + 1}')
+
+if result + 1 > pages_len:
+	exit(f' -> [!!] Result {result + 1} doesnt exist. There are total {pages_len} results for the word "{search_word}"')
+
+word = resp['list'][result]['word']
+example = resp['list'][result]['example'].replace(RCHAR, '. ').replace(NEWLINE, '').replace('[', '').replace(']', '').replace('.', '. ').replace('  ', ' ')
+author = resp['list'][result]['author']
+written_at = datetime.strptime(resp['list'][result]['written_on'], "%Y-%m-%dT%H:%M:%S.%fZ").strftime('%B %d %Y, %I:%M %p')
+definition = resp['list'][result]['definition'].replace(RCHAR, '. ').replace(NEWLINE, '').replace('[', '').replace(']', '').replace('.', '. ').replace('  ', ' ')
+ups = resp['list'][result]['thumbs_up']
+downs = resp['list'][result]['thumbs_down']
+
+
+print(f'{NEWLINE} -> Definition of "{word}", with ↑ {ups} and ↓ {downs}:\n |\\-> {definition}\n | \\-> Example: {example}\n |\n -> By {author} at {written_at}')
+
+# print(f' -> Definition of "{word}" which has ↑ {ups} and ↓ {downs}\n  \\-> By {author} at {written_at}')
+# print(f'  |{NEWLINE}  \\-> {definition}')
+# print(f'  |{NEWLINE}  \\-> Example:\n   \\-> {example}')
