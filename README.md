@@ -16,8 +16,8 @@ WORD is **required**, RESULT_NUMBER and PAGE_NUMBER are **optional**
 
 WORD is the word you want to look for
 
-result is the definition you want
+RESULT_NUMBER is the definition you want
 ![example of a result/definition](result.png)
 
-and page is well, the page
+and PAGE_NUMBER is well, the page
 ![navigation page example](page.png)
