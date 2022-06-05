@@ -1,10 +1,10 @@
 # urbanclictionary, a cli program for urban dictionary
 
-using [**api.urbanictionary.com**](https://api.urbandictionary.com/v0/) and [requests](https://github.com/psf/requests)
+using [**api.urbanictionary.com**](https://api.urbandictionary.com/v0/) and [**requests**](https://github.com/psf/requests)
 
 ![urbanclictionary screenshot](urbanclictionary1.png)
 
-for more click [here](screenshots.md)
+for more click [**here**](screenshots.md)
 
 ## help and usage
 
