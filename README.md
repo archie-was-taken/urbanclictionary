@@ -14,7 +14,7 @@ Usage: `./urbanclictionary WORD RESULT_NUMBER %PAGE_NUMBER`
 
 WORD is **required**, RESULT_NUMBER and PAGE_NUMBER are **optional**
 
-where word is the word you want to look for
+WORD is the word you want to look for
 
 result is the definition you want
 ![example of a result/definition](result.png)
