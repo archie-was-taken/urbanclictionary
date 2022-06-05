@@ -34,7 +34,6 @@ for argument in argv:
 
         if type(argument).__name__ == 'str' and not argument.startswith('%'):
             search_word += f' {argument}'
-
     
 search_word = search_word.strip(' ')
 resp = get(f'https://api.urbandictionary.com/v0/define?term={search_word.replace(" ", "+")}&page={page}').json()
